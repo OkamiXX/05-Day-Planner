@@ -3,7 +3,7 @@
 // in the html.
 const dateEl = $("#currentDay"),
       day = new dayjs().format('dddd, MMMM D YYYY'),
-      time = new dayjs().hour,
+      hora = dayjs().hour(),
       secEl = $(".time-block");
 
 $(function () {
@@ -38,35 +38,36 @@ $(function () {
     // Loops over each of the time-block elements
     // and then executes the function each time.
     // (FEATURE to append the past, present || future clases.)
-
+      
       function timeCheck() {
+        
+        $(secEl).each(function () {
+         
+          // gets the value of the time-block section and gets 
+          // the number part of it in order to compare after to
+          // assign the past, present feature attributes/classes.
+          let sec2 = parseFloat($(this).attr("id").split("-")[1]);
+          console.log(sec2);
 
-      $(secEl).each(function () {
-
-        // gets the value of the time-block section and gets 
-        // the number part of it in order to compare after to
-        // assign the past, present feature attributes/classes.
-        let sec2 = parseFloat(secEl.attr("id").split("-")[1]);
-
-        if (sec2 < time){
-          $(this).removeClass("present");
-          $(this).removeClass("future");
-          $(this).addClass("past");
-        }
-        else if (sec2 === time) {
-          $(this).removeClass("past");
-          $(this).removeClass("future");
-          $(this).addClass("present");
-        }
-        else {
-          $(this).removeClass("present");
-          $(this).removeClass("past");
-          $(this).addClass("future");
-        }
-      })
+          if (sec2 < hora){
+            $(this).removeClass("present");
+            $(this).removeClass("future");
+            $(this).addClass("past");
+          }
+          else if (sec2 === hora) {
+            $(this).removeClass("past");
+            $(this).removeClass("future");
+            $(this).addClass("present");
+          }
+          else {
+            $(this).removeClass("present");
+            $(this).removeClass("past");
+            $(this).addClass("future");
+          }
+        })
     }
     
-    // calls the function
+    // calls the function whenever the document is ready.
       timeCheck();
 
 });
