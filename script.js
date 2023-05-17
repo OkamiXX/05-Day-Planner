@@ -66,7 +66,7 @@ $(function () {
       })
     }
     
-
+    // calls the function
       timeCheck();
 
 });
